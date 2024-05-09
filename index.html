@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Ghibli Movie Explorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.itl.cat/pngfile/big/10-100730_my-neighbour-totoro-background-best-background-images-hd.jpg');
+            background-size: cover;
+            color: #f5f5f5; /* Soft white color for text */
+            font-family: 'Gochi Hand', cursive;
+            height: 100vh;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centers the container vertically and horizontally */
+            margin: 0;
+            padding: 0;
+        }
+        .main-container {
+            background-color: rgba(124, 205, 124, 0.85); /* Deeper pastel green */
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+        .button-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white for the button container */
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .movie-image {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        h1, h2 {
+            color: #CCFF90; /* Light green color for headers */
+        }
+        select, button {
+            background: #90EE90; /* Slightly deeper pastel green */
+            color: #333;
+            border: none;
+        }
+        button:hover {
+            background: #8FBC8F; /* A darker shade of pale green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1 class="text-center">Studio Ghibli Movie Explorer</h1>
+        <select id="movieDropdown" class="form-select">
+            <option selected>Select a movie</option>
+        </select>
+        <div class="button-container text-center">
+            <button id="randomMovieBtn" class="btn btn-lg">Show Random Movie</button>
+        </div>
+        <div id="movieDisplay" class="text-center mt-3">
+            <h2 id="movieTitle"></h2>
+            <img id="movieImg" src="" alt="Movie Image" class="movie-image">
+            <p id="movieReason"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        "use strict";
+
+        let favoriteMovies = [
+            {
+                title: "How To Train Your Dragon",
+                reason: "Amazing soundtrack and tells an emotional story",
+                url: "https://www.rotoscopers.com/wp-content/uploads/2014/06/how-train-your-dragon-2-04.jpg",
+            },
+            {
+                title: "Howl's Moving Castle",
+                reason: "Beautiful and iconic soundtrack, amazing well fleshed out story, beautiful scenery",
+                url: "https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/03/Howls-Moving-Castle.jpg",
+            },
+            {
+                title: "Ponyo",
+                reason: "Very fun and comforting movie to watch, beautiful scenes",
+                url: "https://www.regmovies.com/_next/image?url=https%3A%2F%2Fregalcdn.azureedge.net%2FREG%2FPonyoGhibli2024Dub%2FHO00016194%2FMobile_MovieFeed%2F20240320-121235918.png&w=3840&q=75",
+            }
+        ];
+
+        const dropdown = document.getElementById('movieDropdown');
+        const movieBtn = document.getElementById('randomMovieBtn');
+        const movieTitle = document.getElementById('movieTitle');
+        const movieImg = document.getElementById('movieImg');
+        const movieReason = document.getElementById('movieReason');
+
+        favoriteMovies.forEach(movie => {
+            const option = document.createElement('option');
+            option.value = movie.title;
+            option.textContent = movie.title;
+            dropdown.appendChild(option);
+        });
+
+        movieBtn.addEventListener('click', function() {
+            let random = Math.floor(Math.random() * favoriteMovies.length);
+            let movie = favoriteMovies[random];
+            movieTitle.textContent = movie.title;
+            movieImg.src = movie.url;
+            movieImg.alt = 'Image of ' + movie.title;
+            movieReason.textContent = movie.reason;
+        });
+    </script>
+</body>
+</html>
